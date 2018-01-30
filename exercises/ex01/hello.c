@@ -1,10 +1,9 @@
+
 #include <stdio.h>
 
 int main() {
-	int a = 3;
-	int b = 4;
-	int c = a + b;
-	printf("c is %d\n", c);
-    printf("Hello, World!\n");
+	int x = 5;
+	int y = x + 1;
+    printf("%i", y);
     return 0;
 }
