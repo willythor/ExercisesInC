@@ -27,8 +27,28 @@ returns: 1 if true, 0 otherwise
 */
 int endswith(char *s, char *suffix)
 {
-    // TODO: Fill this in!
+
+   int s_len = strlen(s);
+   int suffix_len = strlen(suffix);
+
+   printf("The len is: %s\n", s_len);
+   printf("The len is: %s\n", suffix_len);
+
+
+
+   char *ret;
+
+   ret = strstr(s, suffix);
+
+   if (ret == NULL) {
     return 0;
+   }
+
+   printf("The substring is: %s\n", ret);
+
+    
+   return 1;  
+  
 }
 
 
