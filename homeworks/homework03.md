@@ -2,49 +2,51 @@
 
 ### C Exercises
 
-Modify the link below so it points to the `ex02.5` directory in your
+Modify the link below so it points to the `ex03` directory in your
 student repository.
 
-[Here is a link to the ex02.5 directory in my repository](https://github.com/willythor/ExercisesInC/tree/master/exercises/ex02.5)
+[Here is a link to the ex03 directory in my repository]
+(https://github.com/willythor/ExercisesInC/tree/master/exercises/ex03)
 
-### Think OS Chapter 3 reading questions
+### Think OS Chapter 4 reading questions
 
-### Virtual memory
+**Files and file systems**
 
-1) The Georgian alphabet has 33 letters.  How many bit are needed to specify a letter?
+1) What abstractions do file systems provide?  Give an example of something that is logically 
+true about files systems but not true of their implementations.
 
-2^6
+A file system consists of files made up of a certain number of bytes, whoever when these files are actually stored they're stored in contiguous or non-contiguous blocks of space. Additionally, each block of space doesn't always contain a single file, sometimes it contains parts of a file or contains the entire file with room to spare.
 
-2) In the UTF-16 character encoding, the binary representation of a character can take up to 32 bits.  
+2) What information do you imagine is stored in an `OpenFileTableEntry`?
 
-Ignoring the details of the encoding scheme, how many different characters can be represented?
+The location within a file that a system is at while reading a given file.
 
-2^32
+3) What are some of the ways operating systems deal with the relatively slow performance of persistent storage?
 
-3) What is the difference between "memory" and "storage" as defined in *Think OS*?
+Block transfers, Prefetching, Buffering, and Caching.
 
-Memory is where data is usually held when a process is running. This is known as random access memory (RAM). This memory is gnerally volatile.
+4) Suppose your program writes a file and prints a message indicating that it is done writing.  
+Then a power cut crashes your computer.  After you restore power and reboot the computer, you find that the 
+file you wrote is not there.  What happened?
 
-Storage is non-volatile an is usually stored on a HDD or SSD. This is what a process reads and writes files to if neccessary. 
+A program might cache some data before writing it to disk in order to avoid writing to the disk too often. It's very possible that when the power was cut, the message was still cached and hadn't yet been written to the disk.
 
-4) What is the difference between a GiB and a GB?  What is the percentage difference in their sizes?
+5) Can you think of one advantage of a File Allocation Table over a UNIX inode?  Or an advantage of a inode over a FAT?
 
-A GiB is 2^30 bytes and a GB is 10^9 bytes. There is roughly a 7 percent differenct in their states.
+It might be faster to read a large file in order using FAT over an inode. However, searching a file should be faster using the inode structure.
 
-5) How does the virtual memory system help isolate processes from each other?
+6) What is overhead?  What is fragmentation?
 
-Virtual memory generates a list of valid physical address spaces and encapsulates them in a numbered list of virtual address spaces. This way a program never deals with physical address spaces and only the virtual ones. Each time a program needs to read or write values in memory, the hardware, with help from the operating system, translates the virtual address the program has access to to a physical address, before accessing main memory.
+Overhead is the amount of necessary extra space allocated to what is not actually files, such as the data structures used by the allocators. Fragmentaion is when some bloacks are left unused or some are left partially used.
 
-6) Why do you think the stack and the heap are usually located at opposite ends of the address space?
+7) Why is the "everything is a file" principle a good idea?  Why might it be a bad idea?
 
-That way as the heap and stack expand, they expand towards each other and minimize the chance of running out of virtual memory (which seems unlikely in a 64-bit system).
+This principle is a good idea because it makes life easier for programmers since they only have to learn one API. However, it might be a bad idea if it acts exclusively like a stream and doesn't allow a user to access the end of a sorted list for example, without going throught the entire list.
 
-7) What Python data structure would you use to represent a sparse array?
+If you would like to learn more about file systems, a good next step is to learn about journaling file systems.  
+Start with [this Wikipedia article](https://en.wikipedia.org/wiki/Journaling_file_system), then 
+[Anatomy of Linux Journaling File Systems](http://www.ibm.com/developerworks/library/l-journaling-filesystems/index.html).  
+Also consider reading [this USENIX paper](https://www.usenix.org/legacy/event/usenix05/tech/general/full_papers/prabhakaran/prabhakaran.pdf).
 
-A dictionary or import scipy and use `scipy.sparse`.
-
-8) What is a context switch?
-
-The act of interrupting a process, saving its state, and then running another process.
 
 
