@@ -59,7 +59,7 @@ Chrome, Visual Studio Code
 
 4) What's wrong with allocating a large number of small chunks?  What can you do to mitigate the problem?
 
-It'll cause fragmentation and make it very slow to allocate memory in the future. According to something I read on stackoverflow, a possible solution is writing your a custom memory allocator.
+It'll cause fragmentation and make it very slow to allocate memory in the future. According to something I read on stackoverflow, a possible solution is writing your own custom memory allocator.
 
 If you want to know more about how malloc works, read 
 [Doug Lea's paper about dlmalloc](http://gee.cs.oswego.edu/dl/html/malloc.html)
