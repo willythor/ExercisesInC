@@ -22,6 +22,7 @@ constant time:
 time proportional to size of allocated chunk:
 - calloc
 
+
 2) For each of the following memory errors, give an example of something that might go wrong:
 
 a) Reading from unallocated memory.
