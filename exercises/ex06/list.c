@@ -36,12 +36,12 @@ Node *make_node(int val, Node *next) {
 * list: pointer to pointer to Node
 */
 void print_list(Node **list) {
-    Node *current = *list;
+    Node *curr = *list;
 
     printf("[ ");
-    while (current != NULL) {
-        printf("%d ", current->val);
-        current = current->next;
+    while (curr != NULL) {
+        printf("%d ", curr->val);
+        curr = curr->next;
     }
     printf("]\n");
 }
@@ -53,9 +53,11 @@ void print_list(Node **list) {
 *
 * returns: int or -1 if the list is empty
 */
-int pop(Node **list) {
-    // FILL THIS IN!
-    return 0;
+int pop(Node** list) {
+    Node* head = *list;
+    *list = head->next;
+
+    return head->val;
 }
 
 
@@ -64,8 +66,8 @@ int pop(Node **list) {
 * list: pointer to pointer to Node
 * val: value to add
 */
-void push(Node **list, int val) {
-    // FILL THIS IN!
+void push(Node** list, int val) {
+    *list = make_node(val, *list);
 }
 
 
@@ -79,8 +81,24 @@ void push(Node **list, int val) {
 * returns: number of nodes removed
 */
 int remove_by_value(Node **list, int val) {
-    // FILL THIS IN!
-    return 0;
+    Node* prev = NULL;
+    Node* curr = *list;
+    int removed = 0;
+
+    while (curr != NULL) {
+        if (curr->val == val) {
+            if (prev==NULL) {
+                pop(list);
+            } else {
+                prev->next = curr->next;    
+            }
+            removed++;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+
+    return removed;
 }
 
 
@@ -91,7 +109,18 @@ int remove_by_value(Node **list, int val) {
 * list: pointer to pointer to Node
 */
 void reverse(Node **list) {
-    // FILL THIS IN!
+    Node* prev = NULL;
+    Node* curr = *list;
+    Node* next = curr->next;
+
+    while (curr != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }    
+
+    *list = prev;
 }
 
 

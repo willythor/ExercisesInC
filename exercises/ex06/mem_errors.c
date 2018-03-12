@@ -11,7 +11,10 @@ License: Creative Commons Attribution-ShareAlike 3.0
 
 
 void free_anything(int *p) {
+    if (p == NULL) return;
+
     free(p);
+    p = NULL;
 }
 
 int read_element(int *array, int index) {
@@ -24,7 +27,9 @@ int read_element(int *array, int index) {
 
 int main()
 {
-    int never_allocated;
+    // commenting out to get rid of the 
+    // warning that I'm not using this var
+    // int never_allocated;
     int *free_twice = malloc(sizeof (int));
     int *use_after_free = malloc(sizeof (int));
     int *never_free = malloc(sizeof (int));
@@ -41,7 +46,8 @@ int main()
 
     // and it catches use after free
     free(use_after_free);
-    *use_after_free = 17;
+    //I dont think there's a way to catch this without a function
+    //*use_after_free = 17;
 
     // never_free is definitely lost
     *never_free = 17;
@@ -50,10 +56,17 @@ int main()
     // free(&never_allocated);
 
     // but this one doesn't
-    free_anything(&never_allocated);
+    // cant check if this is allocated within the function,
+    // so I have to comment it out
+    // free_anything(&never_allocated);
 
     free(free_twice);
-    free(free_twice);
+    // can't free twice..
+    // free(free_twice);
+
+    //freeing never free to get rid of final error
+    free(never_free);
+    free(array2);
 
     return 0;
 }
